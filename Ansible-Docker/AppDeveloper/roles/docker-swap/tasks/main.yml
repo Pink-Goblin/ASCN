@@ -1,0 +1,35 @@
+# Copy the files
+- name: Copy Dockerfile
+  ansible.builtin.copy:
+    src: Dockerfile
+    dest: Dockerfile
+
+- name: Copy Script
+  ansible.builtin.copy:
+    src: script.sh
+    dest: script.sh
+
+- name: Build the Swap container
+  community.docker.docker_image_build:
+    name: swap_image
+    path: .
+    dockerfile: Dockerfile
+
+# Start the Swap container
+- name: Run Swap container
+  community.docker.docker_container:
+    name: "swap"
+    image: "swap_image"
+    state: started
+    ports:
+      - "8000:8000"
+    env:
+      DB_HOST: "{{ db_host }}"
+      DB_DATABASE: "{{ db_name }}"
+      DB_USERNAME: "{{ db_username }}"
+      DB_PASSWORD: "{{ db_password }}"
+      SEED: "true"
+
+    networks:
+      - name: "{{ db_network }}"
+    detach: true

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: myconfigmap
+data:
+  db_network: dnet
+  db_host: swap-db
+  db_image: mysql:latest
+  db_name: swap

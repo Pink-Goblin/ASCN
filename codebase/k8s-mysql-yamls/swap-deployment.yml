@@ -1,0 +1,31 @@
+---
+# TO DO
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: swap-deployment
+  labels:
+    app: swap
+    tier: database
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      app: swap
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: swap
+        tier: Donald-o-Feiticeiro
+    spec:
+      containers:
+      - name: swap
+        image: ascnuminho/swap:u24
+        envFrom:
+        - configMapRef:
+            name: myconfigmap
+        ports:
+        - containerPort: 8000
+       

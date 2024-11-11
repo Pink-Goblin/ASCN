@@ -1,0 +1,41 @@
+- name: Remove Swap Deployment object
+  kubernetes.core.k8s:
+    state: absent
+    api_version: v1
+    kind: Deployment
+    namespace: default
+    name: swap-deployment
+
+- name: Remove Swap Service object
+  kubernetes.core.k8s:
+    state: absent
+    api_version: v1
+    kind: Service
+    namespace: default
+    name: swap-service
+
+- name: Remove MySQL Deployment object
+  kubernetes.core.k8s:
+    state: absent
+    api_version: v1
+    kind: Deployment
+    namespace: default
+    name: mysql-deployment
+
+- name: Remove MySQL PVC object
+  kubernetes.core.k8s:
+    state: absent
+    api_version: v1
+    kind: PersistentVolumeClaim
+    namespace: default
+    name: mysql-pvc
+
+- name: Remove MySQL Service object
+  kubernetes.core.k8s:
+    state: absent
+    api_version: v1
+    kind: Service
+    namespace: default
+    name: mysql-service
+# usar flag env ou seed para dar a opção de apagar ou n data
+

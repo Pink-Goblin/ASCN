@@ -1,0 +1,7 @@
+- name: "Uninstall MySQL & Swap with Kubernetes"
+  hosts: localhost
+  gather_facts: false
+  roles:
+    - role: k8s-delete
+      tags: ["delete"]
+
